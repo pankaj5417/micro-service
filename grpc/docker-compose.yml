@@ -1,0 +1,21 @@
+version: '3.8'
+services:
+  product-service:
+    build:
+      context: ./product-service
+    container_name: product-service
+    ports:
+      - "50051:50051"
+    volumes:
+      - ./proto:/proto
+
+  order-service:
+    build:
+      context: ./order-service
+    container_name: order-service
+    ports:
+      - "50052:50052"
+    volumes:
+      - ./proto:/proto
+    depends_on:
+      - product-service
